@@ -1,0 +1,102 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Base styles. Brand Theme colors/typography are layered in via
+   tailwind.config.ts (task 2.1). These defaults keep the document
+   readable and prevent horizontal overflow at narrow viewports. */
+:root {
+  color-scheme: light;
+}
+
+html,
+body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  /* Brand Theme base surface: cream background + charcoal text with the
+     sans body font, so every page inherits a consistent premium look
+     (Req 14.1). Mirrors the Tailwind tokens applied on <body> in
+     app/layout.tsx and keeps styling stable before hydration. */
+  min-height: 100vh;
+  background-color: theme("colors.cream.50");
+  color: theme("colors.charcoal.900");
+  font-family: theme("fontFamily.sans");
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Visible focus indicator for interactive controls (Req 13.3). */
+:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
+}
+
+/* ---------------------------------------------------------------------------
+   Decorative wood-grain surfaces (no image assets required).
+   Layered repeating gradients simulate warm wood-plank grain, giving the site
+   a photographic, premium feel until real photography is added. Marked
+   aria-hidden where used; text is layered above with sufficient contrast.
+--------------------------------------------------------------------------- */
+.wood-grain {
+  background-color: #2a1a10;
+  background-image:
+    linear-gradient(
+      115deg,
+      rgba(0, 0, 0, 0.55) 0%,
+      rgba(0, 0, 0, 0.15) 45%,
+      rgba(0, 0, 0, 0.55) 100%
+    ),
+    repeating-linear-gradient(
+      92deg,
+      #3b2417 0px,
+      #4a2f1d 3px,
+      #35200f 7px,
+      #4f331f 11px,
+      #3b2417 16px
+    ),
+    repeating-linear-gradient(
+      88deg,
+      rgba(255, 255, 255, 0.02) 0px,
+      rgba(0, 0, 0, 0.06) 60px,
+      rgba(255, 255, 255, 0.02) 130px
+    );
+}
+
+.wood-grain-light {
+  background-color: #d0a06a;
+  background-image:
+    repeating-linear-gradient(
+      91deg,
+      #d0a06a 0px,
+      #c9a06a 4px,
+      #c08a4e 9px,
+      #d8b077 14px,
+      #d0a06a 20px
+    );
+}
+
+/* Soft grain texture overlay for light cream sections. */
+.grain-overlay {
+  position: relative;
+}
+.grain-overlay::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.4;
+  background-image: radial-gradient(
+    rgba(59, 36, 23, 0.05) 1px,
+    transparent 1px
+  );
+  background-size: 18px 18px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-fade-up {
+    animation: none !important;
+  }
+}
