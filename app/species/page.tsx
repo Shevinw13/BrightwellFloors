@@ -1,8 +1,10 @@
 import { Section } from "@/components/ui/Section";
 import { CTABand } from "@/components/ui/CTABand";
+import { PageHeader } from "@/components/ui/PageHeader";
 import SpeciesGrid from "@/components/species/SpeciesGrid";
 import SpeciesExplorer from "@/components/species/SpeciesExplorer";
 import { featuredSpecies } from "@/lib/data/species";
+import { consultationImage } from "@/lib/data/images";
 import { pageMetadata } from "@/lib/seo/metadata";
 
 export const metadata = pageMetadata.species;
@@ -18,23 +20,12 @@ export const metadata = pageMetadata.species;
 export default function SpeciesPage() {
   return (
     <>
-      {/* Intro */}
-      <section className="wood-grain w-full">
-        <div className="mx-auto max-w-6xl px-4 py-section-lg sm:px-6 lg:px-8">
-          <p className="flex items-center gap-3 font-sans text-eyebrow font-semibold uppercase text-oak-300">
-            <span aria-hidden="true" className="h-px w-10 bg-oak-300/70" />
-            The wood species library
-          </p>
-          <h1 className="mt-6 max-w-3xl font-display text-display-lg text-cream-50">
-            33 species. One perfect floor for your home.
-          </h1>
-          <p className="mt-6 max-w-2xl text-body-lg text-cream-100">
-            Red and white oak alone make up two-thirds of American wood floors —
-            but that&rsquo;s just the beginning. Start with a crowd favorite, or
-            filter the full library by color and durability to find your match.
-          </p>
-        </div>
-      </section>
+      <PageHeader
+        eyebrow="The wood species library"
+        title="33 species. One perfect floor for your home."
+        intro="Red and white oak alone make up two-thirds of American wood floors — but that's just the beginning. Start with a crowd favorite, or filter the full library by color and durability to find your match."
+        image={consultationImage}
+      />
 
       {/* Featured tier — the fast on-ramp */}
       <Section
@@ -47,10 +38,11 @@ export default function SpeciesPage() {
         </div>
       </Section>
 
-      {/* Full filterable library */}
+      {/* Full filterable library, organized into named groups */}
       <Section
         eyebrow="Browse the full library"
-        heading="Find yours by color & durability"
+        heading="Explore every species"
+        intro="Grouped by origin below — or filter all 33 by color and durability to zero in on your match."
         className="bg-cream-100 grain-overlay"
       >
         <div className="mt-10">

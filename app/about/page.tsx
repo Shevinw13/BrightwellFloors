@@ -1,7 +1,8 @@
 import { Section } from "@/components/ui/Section";
 import { CTABand } from "@/components/ui/CTABand";
-import { ProcessSteps } from "@/components/ui/ProcessSteps";
-import { trustStats } from "@/lib/data/proof";
+import { FeatureSplit } from "@/components/ui/FeatureSplit";
+import { PageHeader } from "@/components/ui/PageHeader";
+import { aboutImage, consultationImage } from "@/lib/data/images";
 import { pageMetadata } from "@/lib/seo/metadata";
 
 export const metadata = pageMetadata.about;
@@ -14,33 +15,35 @@ export const metadata = pageMetadata.about;
 export default function AboutPage() {
   return (
     <>
-      {/* Intro */}
-      <section className="wood-grain w-full">
-        <div className="mx-auto max-w-6xl px-4 py-section-lg sm:px-6 lg:px-8">
-          <p className="flex items-center gap-3 font-sans text-eyebrow font-semibold uppercase text-oak-300">
-            <span aria-hidden="true" className="h-px w-10 bg-oak-300/70" />
-            Our story
-          </p>
-          <h1 className="mt-6 max-w-3xl font-display text-display-lg text-cream-50">
-            Craftsmen first. Salespeople never.
-          </h1>
-          <p className="mt-6 max-w-2xl text-body-lg text-cream-100">
-            For over two decades, Brightwell Floors has treated every board like
-            it&rsquo;s going into our own home &mdash; because the floor is the
-            one part of a room you touch every single day.
-          </p>
-        </div>
-      </section>
+      <PageHeader
+        eyebrow="Our story"
+        title="Craftsmen first. Salespeople never."
+        intro="For over two decades, Brightwell Floors has treated every board like it's going into our own home — because the floor is the one part of a room you touch every single day."
+        image={aboutImage}
+      />
 
-      {/* Stat band */}
+      {/* Values band — a different credibility angle than the home hero stats. */}
       <section className="border-b border-cream-200 bg-cream-100">
-        <div className="mx-auto grid max-w-6xl grid-cols-2 gap-8 px-4 py-12 sm:px-6 md:grid-cols-4 lg:px-8">
-          {trustStats.map((s) => (
-            <div key={s.label}>
-              <p className="font-display text-display-sm text-walnut-900">
-                {s.value}
-              </p>
-              <p className="mt-1 text-body-sm text-charcoal-700">{s.label}</p>
+        <div className="mx-auto grid max-w-6xl grid-cols-1 gap-8 px-4 py-12 sm:px-6 md:grid-cols-3 lg:px-8">
+          {[
+            {
+              title: "Family-owned",
+              body: "Independently run since day one — you deal with the people whose name is on the door.",
+            },
+            {
+              title: "In-house craftsmen",
+              body: "No subcontractors. The team that quotes your job is the team that installs it.",
+            },
+            {
+              title: "Directly sourced wood",
+              body: "We buy our hardwoods at the source, so you get better wood at an honest price.",
+            },
+          ].map((v) => (
+            <div key={v.title}>
+              <h2 className="font-display text-heading-md text-walnut-900">
+                {v.title}
+              </h2>
+              <p className="mt-2 text-body-md text-charcoal-700">{v.body}</p>
             </div>
           ))}
         </div>
@@ -87,23 +90,30 @@ export default function AboutPage() {
         </div>
       </Section>
 
-      {/* Free consultation (Req 4.3) */}
-      <Section
-        eyebrow="No charge, no pressure"
-        heading="Guidance, not a sales pitch"
-        intro="Choosing a floor should be exciting, not overwhelming — so our design consultants do the heavy lifting, at no charge."
+      {/* Human story — a personal angle, distinct from the values band above. */}
+      <FeatureSplit
+        eyebrow="Why floors"
+        heading="A trade passed down, not picked up"
+        image={consultationImage}
       >
-        <p className="mt-6 max-w-3xl text-body-md text-charcoal-700">
-          We&rsquo;ll show a room with multiple choices side by side &mdash;
-          different species, widths, stains, and styles &mdash; so you see
-          exactly how each option looks before you commit.
+        <p>
+          Brightwell started in a home workshop, learning to read grain and
+          coax the best from every board. Decades later, that same care shows
+          up in the quiet details &mdash; a seam you can&rsquo;t feel, a stain
+          that catches the afternoon light just right.
         </p>
-      </Section>
+        <p>
+          Most of our work comes by word of mouth: a neighbor sees a floor,
+          asks who did it, and calls. That&rsquo;s the reputation we protect on
+          every job.
+        </p>
+      </FeatureSplit>
 
-      {/* How we work — absorbed from the retired Services page. */}
-      <ProcessSteps />
-
-      <CTABand />
+      <CTABand
+        heading="Let's build something you'll love"
+        intro="Tell us about your space and we'll bring the samples to you."
+        ctaLabel="Start Your Project"
+      />
     </>
   );
 }

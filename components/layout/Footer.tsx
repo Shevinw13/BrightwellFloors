@@ -2,6 +2,7 @@ import Link from "next/link";
 import { business } from "@/lib/data/business";
 import { footerLinks } from "@/lib/data/navigation";
 import { CTAButton } from "@/components/ui/CTAButton";
+import { Logo } from "@/components/layout/Logo";
 
 /**
  * Footer — shared site footer rendered on every page via the root layout
@@ -15,18 +16,13 @@ export function Footer() {
     "duration-200 hover:text-brass-400";
 
   return (
-    <footer className="wood-grain text-cream-100">
+    <footer className="bg-walnut-950 text-cream-100">
       <div className="mx-auto w-full max-w-7xl px-4 py-section sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 gap-12 md:grid-cols-12">
           {/* Brand + pitch */}
           <div className="md:col-span-5">
-            <p className="flex items-center gap-2 font-display text-heading-lg font-semibold text-cream-50">
-              <span aria-hidden="true" className="text-brass">
-                &#9670;
-              </span>
-              Brightwell Floors
-            </p>
-            <p className="mt-4 max-w-sm text-body-md text-cream-100/85">
+            <Logo tone="light" />
+            <p className="mt-5 max-w-sm text-body-md text-cream-100/85">
               Premium real wood floors, designed, supplied, and installed by
               craftsmen &mdash; and 100% guaranteed.
             </p>

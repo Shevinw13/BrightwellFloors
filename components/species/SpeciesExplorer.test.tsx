@@ -5,10 +5,14 @@ import SpeciesExplorer from "./SpeciesExplorer";
 import { species } from "@/lib/data/species";
 
 describe("SpeciesExplorer", () => {
-  it("shows the full catalog by default", () => {
+  it("shows the grouped catalog by default (no active filter)", () => {
     render(<SpeciesExplorer />);
+    // Default view is organized into named groups, not a flat count.
     expect(
-      screen.getByText(new RegExp(`of ${species.length} species`))
+      screen.getByRole("heading", { name: /domestic hardwoods/i })
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole("heading", { name: /exotic & imported/i })
     ).toBeInTheDocument();
   });
 
@@ -40,13 +44,10 @@ describe("SpeciesExplorer", () => {
     expect(screen.getByRole("button", { name: /clear filters/i })).toBeInTheDocument();
 
     await user.click(screen.getByRole("button", { name: /clear filters/i }));
+    // With no active filter, the count disappears and the grouped view returns.
+    expect(screen.queryByText(/showing/i)).not.toBeInTheDocument();
     expect(
-      screen.getByText(
-        (_, el) =>
-          el?.tagName === "P" &&
-          el.textContent ===
-            `Showing ${species.length} of ${species.length} species`
-      )
+      screen.getByRole("heading", { name: /domestic hardwoods/i })
     ).toBeInTheDocument();
   });
 

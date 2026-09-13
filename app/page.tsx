@@ -4,47 +4,40 @@ import { Section } from "@/components/ui/Section";
 import { Card } from "@/components/ui/Card";
 import { CTAButton } from "@/components/ui/CTAButton";
 import { CTABand } from "@/components/ui/CTABand";
+import { FeatureSplit } from "@/components/ui/FeatureSplit";
 import { ProcessSteps } from "@/components/ui/ProcessSteps";
 import { Testimonials } from "@/components/ui/Testimonials";
+import { Faqs } from "@/components/ui/Faqs";
 import { featuredSpecies } from "@/lib/data/species";
+import { consultationImage, flooringTypeImages } from "@/lib/data/images";
 import { pageMetadata } from "@/lib/seo/metadata";
 
 export const metadata = pageMetadata.home;
 
-const benefits = [
-  {
-    title: "Unbeatable pricing",
-    body: "We source hardwoods directly and beat any comparable quote — in writing.",
-  },
-  {
-    title: "Master craftsmanship",
-    body: "Our own installers, never subcontractors, treat every board like it's going in their own home.",
-  },
-  {
-    title: "Free design help",
-    body: "Expert consultants guide your choices and show options side by side in your own room.",
-  },
-  {
-    title: "100% guarantee",
-    body: "Not thrilled with the result? We make it right. That's the Brightwell promise.",
-  },
-];
+/**
+ * Home page — rebuilt to sell, following the section order proven across
+ * top flooring sites and homepage-conversion research:
+ *   Hero (value + 1 CTA + trust) → Services/category tiles → Feature (why us,
+ *   with a face) → Featured species teaser → Process → Testimonials → FAQ
+ *   (objection handling) → final CTA.
+ * Each message appears in exactly ONE section (de-duplicated against About).
+ */
 
 const flooringTypes = [
   {
-    title: "Solid Wood",
-    swatch: "linear-gradient(135deg, #c9a77c, #a9743b)",
-    body: "One piece of genuine wood, top to bottom. Sand and refinish it for generations — a true lifetime floor.",
+    name: "Solid Wood",
+    image: flooringTypeImages.solid,
+    body: "One piece of genuine wood you can refinish for generations. A true lifetime floor.",
   },
   {
-    title: "Engineered Wood",
-    swatch: "linear-gradient(135deg, #d0a06a, #5a3a24)",
-    body: "Real wood in stable layers that resist moisture and movement — ideal for basements and changing conditions.",
+    name: "Engineered Wood",
+    image: flooringTypeImages.engineered,
+    body: "Real wood in stable layers that shrug off moisture — perfect for basements.",
   },
   {
-    title: "Composite Engineered",
-    swatch: "linear-gradient(135deg, #b98a5e, #3b2417)",
-    body: "A genuine wood wear surface over a durable composite core — smart value without sacrificing the look.",
+    name: "Composite Engineered",
+    image: flooringTypeImages.composite,
+    body: "A genuine wood surface over a durable core — the look you want for less.",
   },
 ];
 
@@ -53,45 +46,58 @@ export default function HomePage() {
     <>
       <Hero />
 
-      {/* Why Brightwell — scannable benefits (the trust layer). */}
+      {/* Services / category tiles — the primary decision paths (3 clean cards). */}
       <Section
-        eyebrow="Why Brightwell"
-        heading="Get it right, and never overpay to do it"
+        eyebrow="What we do"
+        heading="Beautiful floors, expertly installed"
+        intro="Whatever your room, subfloor, or budget, there's a real wood floor that's right for it — and we install every one with our own craftsmen."
         centered
-      >
-        <ul role="list" className="mt-14 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
-          {benefits.map((b) => (
-            <li key={b.title} className="flex flex-col border-t-2 border-brass pt-5">
-              <h3 className="font-display text-heading-md text-walnut-900">
-                {b.title}
-              </h3>
-              <p className="mt-2 text-body-md text-charcoal-700">{b.body}</p>
-            </li>
-          ))}
-        </ul>
-      </Section>
-
-      {/* Flooring types with wood-tone swatches — the whole section links onward. */}
-      <Section
-        eyebrow="Find your fit"
-        heading="Three ways to get a real wood floor"
-        intro="Solid, engineered, or composite — we'll help you choose the construction that fits your space and budget."
-        className="bg-cream-100 grain-overlay"
       >
         <div className="mt-14 grid grid-cols-1 gap-6 md:grid-cols-3">
           {flooringTypes.map((t) => (
-            <Card key={t.title} title={t.title} swatch={t.swatch}>
+            <Card
+              key={t.name}
+              title={t.name}
+              imageSrc={t.image.src}
+              imageAlt={t.image.alt}
+              footer={
+                <Link
+                  href="/flooring-types"
+                  className="focus-ring rounded-sm font-sans text-body-sm font-semibold text-oak-500 underline-offset-4 hover:underline"
+                >
+                  Learn more &rarr;
+                </Link>
+              }
+            >
               {t.body}
             </Card>
           ))}
         </div>
       </Section>
 
-      {/* Featured species preview — turns the catalog into a teaser. */}
+      {/* Why us, with a face — the consultation experience (owned here). */}
+      <FeatureSplit
+        eyebrow="The Brightwell difference"
+        heading="See your floor before you commit"
+        image={consultationImage}
+        reverse
+      >
+        <p>
+          We bring the showroom to you. Compare species, widths, and stains side
+          by side in your own room and your own light — so the choice feels
+          obvious, not overwhelming.
+        </p>
+        <p>
+          Expert guidance at no charge, with zero pressure to say yes.
+        </p>
+      </FeatureSplit>
+
+      {/* Featured species teaser. */}
       <Section
         eyebrow="The wood"
         heading="Our most-loved species"
-        intro="From the warm neutrals of white oak to the deep chocolate of walnut — explore the species our clients choose most."
+        intro="From the warm neutrals of white oak to the deep chocolate of walnut — a taste of the 33 species we offer."
+        className="bg-cream-100 grain-overlay"
       >
         <ul role="list" className="mt-12 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">
           {featuredSpecies.map((s) => (
@@ -122,6 +128,8 @@ export default function HomePage() {
       <ProcessSteps />
 
       <Testimonials />
+
+      <Faqs />
 
       <CTABand />
     </>

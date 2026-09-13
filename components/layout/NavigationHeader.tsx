@@ -27,22 +27,19 @@ import { navLinks } from "@/lib/data/navigation";
 import { business } from "@/lib/data/business";
 import CTAButton from "@/components/ui/CTAButton";
 import MobileNavToggle from "@/components/layout/MobileNavToggle";
+import { Logo } from "@/components/layout/Logo";
 
 export function NavigationHeader() {
   return (
     <header className="sticky top-0 z-50 w-full border-b border-walnut-800/60 bg-walnut-900/95 text-cream-50 backdrop-blur supports-[backdrop-filter]:bg-walnut-900/80">
       <div className="mx-auto flex w-full max-w-7xl items-center justify-between gap-4 px-4 py-4 sm:px-6 lg:px-8">
-        {/* Brand name/logo — links to Home (Req 1.3). */}
+        {/* Brand logo — links to Home (Req 1.3). */}
         <Link
           href="/"
-          className="focus-ring flex items-center gap-2 rounded-md no-underline"
+          aria-label="Brightwell Floors — home"
+          className="focus-ring rounded-md no-underline"
         >
-          <span aria-hidden="true" className="text-heading-lg text-brass">
-            &#9670;
-          </span>
-          <span className="font-display text-heading-lg font-semibold text-cream-50 hover:text-oak-300">
-            Brightwell Floors
-          </span>
+          <Logo tone="light" />
         </Link>
 
         {/* Desktop navigation: links + CTA, visible md+ and hidden below 768px

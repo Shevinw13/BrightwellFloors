@@ -1,6 +1,8 @@
 import { Section } from "@/components/ui/Section";
 import { Card } from "@/components/ui/Card";
 import { CTABand } from "@/components/ui/CTABand";
+import { PageHeader } from "@/components/ui/PageHeader";
+import { flooringTypeImages, aboutImage } from "@/lib/data/images";
 import { pageMetadata } from "@/lib/seo/metadata";
 
 export const metadata = pageMetadata.flooringTypes;
@@ -18,24 +20,24 @@ export const metadata = pageMetadata.flooringTypes;
 const construction = [
   {
     name: "Solid Wood",
-    swatch: "linear-gradient(135deg, #c9a77c, #a9743b)",
-    best: "Best for: on- and above-grade rooms you'll keep for life",
+    image: flooringTypeImages.solid,
+    best: "Best for: any room on or above ground",
     lead: "One piece of genuine wood, top to bottom.",
-    body: "Sand and refinish it many times over its life. Because it renews again and again, it's a true lifetime floor — often outlasting the house itself.",
+    body: "Because it's solid all the way through, it can be sanded, refinished, and even color-changed many times for years to come — making it a true \u201clifetime floor\u201d that can outlast the house itself.",
   },
   {
     name: "Engineered Wood",
-    swatch: "linear-gradient(135deg, #d0a06a, #5a3a24)",
+    image: flooringTypeImages.engineered,
     best: "Best for: basements and changing humidity",
-    lead: "Genuine wood in multiple stable layers.",
-    body: "A higher-quality wood tops layers that expand and contract less than solid wood — ideal for basements. Typically refinishable four to five times.",
+    lead: "Genuine wood in multiple layers.",
+    body: "The top layer is a higher-quality wood over stable core layers. Because it expands and contracts less than solid wood, it's ideal for basement installations. It can be refinished too — usually no more than 4\u20135 times.",
   },
   {
     name: "Composite Engineered",
-    swatch: "linear-gradient(135deg, #b98a5e, #3b2417)",
+    image: flooringTypeImages.composite,
     best: "Best for: smart value without losing the look",
-    lead: "Real wood where it counts — the surface you walk on.",
-    body: "Real wood on the wearable surface, with a durable composite backing and core rather than solid wood underneath.",
+    lead: "Real wood on the wearable surface only.",
+    body: "The surface you walk on is genuine wood, while the backing and core may be made of composite materials rather than real wood — a budget-friendly way to get the look.",
   },
 ];
 
@@ -44,47 +46,47 @@ const styles = [
     name: "Strip",
     swatch:
       "repeating-linear-gradient(90deg, #c9a77c 0 10px, #b98a5e 10px 20px)",
-    body: "Boards three inches or less wide. Narrow lines make a room feel more intimate — and appear a touch smaller.",
+    body: "Boards 3\u2033 wide or less. The narrow lines run the length of a room and often make the space appear a little smaller.",
   },
   {
     name: "Plank",
     swatch:
       "repeating-linear-gradient(90deg, #c9a77c 0 28px, #b98a5e 28px 56px)",
-    body: "Boards greater than three inches wide. Fewer seams create a larger, casual, modern look that's in high demand today.",
+    body: "Boards greater than 3\u2033 wide. Wider boards and fewer seams create a larger, more casual, modern look — today's most popular choice.",
   },
   {
     name: "Parquet",
     swatch:
       "repeating-conic-gradient(#c9a77c 0deg 90deg, #b98a5e 90deg 180deg)",
-    body: "Boards that vary in size in a geometric, non-linear pattern. A classic look that has fallen out of favor in recent decades.",
+    body: "Boards that vary in size, arranged in a geometric, non-linear pattern. A distinctive look that has fallen out of favor over the past few decades.",
   },
 ];
 
 export default function WoodTypesPage() {
   return (
     <>
-      <section className="wood-grain w-full">
-        <div className="mx-auto max-w-6xl px-4 py-section-lg sm:px-6 lg:px-8">
-          <p className="flex items-center gap-3 font-sans text-eyebrow font-semibold uppercase text-oak-300">
-            <span aria-hidden="true" className="h-px w-10 bg-oak-300/70" />
-            Know your options
-          </p>
-          <h1 className="mt-6 max-w-3xl font-display text-display-lg text-cream-50">
-            Wood types &amp; styles
-          </h1>
-          <p className="mt-6 max-w-2xl text-body-lg text-cream-100">
-            All real wood — the difference is how it&rsquo;s built and how it&rsquo;s
-            laid. Here&rsquo;s how to choose the right construction and board
-            style for your room and budget.
-          </p>
-        </div>
-      </section>
+      <PageHeader
+        eyebrow="Know your options"
+        title="Wood types & styles"
+        intro="All real wood — the difference is how it's built and how it's laid. Here's how to choose the right construction and board style for your room and budget."
+        image={aboutImage}
+      />
 
       {/* Construction types (Req 5.1–5.3) */}
-      <Section eyebrow="How it's built" heading="Three ways to get a real wood floor">
+      <Section
+        eyebrow="How it's built"
+        heading="Three ways to get a real wood floor"
+        intro="Every wood floor falls into one of three constructions. They look similar underfoot — the real difference is how they're layered, where they can go, and how many times they can be refinished."
+      >
         <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-3">
           {construction.map((t) => (
-            <Card key={t.name} title={t.name} swatch={t.swatch} eyebrow={t.best}>
+            <Card
+              key={t.name}
+              title={t.name}
+              imageSrc={t.image.src}
+              imageAlt={t.image.alt}
+              eyebrow={t.best}
+            >
               <p className="font-semibold text-walnut-900">{t.lead}</p>
               <p className="mt-2">{t.body}</p>
             </Card>
@@ -110,6 +112,7 @@ export default function WoodTypesPage() {
       <Section
         eyebrow="How it's laid"
         heading="Strip, plank, or parquet"
+        intro="Wood floors are milled in almost any width, and the board size you choose changes the whole feel of a room. These are the three classic layouts."
         className="bg-cream-100 grain-overlay"
       >
         <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-3">
@@ -121,18 +124,24 @@ export default function WoodTypesPage() {
         </div>
       </Section>
 
-      {/* Guidance + oak stat (Req 6.4, 6.5) */}
-      <Section>
-        <div className="grid grid-cols-1 gap-10 md:grid-cols-2 md:items-center">
-          <div>
-            <h2 className="font-display text-display-sm text-walnut-900">
-              Any width. Any color. Your call.
-            </h2>
-            <p className="mt-4 text-body-md text-charcoal-700">
-              Wood floors come in almost any width. Species, color-stain, and
-              width are all chosen by taste, so you can tailor the look to your
-              room and your style — and we&rsquo;ll help you compare options in
-              person.
+      {/* Species education + oak stat (Req 6.4, 6.5) */}
+      <Section
+        eyebrow="Choosing a species"
+        heading="So many options — and it comes down to taste"
+        intro="Wood flooring is made from hardwoods, softwoods, domestic lumber, and a variety of imported species. Each one has its own visual character and maintenance needs, so the right choice is really a matter of your taste and preference."
+      >
+        <div className="mt-12 grid grid-cols-1 gap-10 md:grid-cols-2 md:items-center">
+          <div className="space-y-4 text-body-md text-charcoal-700">
+            <p>
+              Species, color-stain, and board width are all chosen to suit your
+              style — and you don&rsquo;t have to decide alone. Our expert design
+              consultants make recommendations at no charge, and can even show
+              you what your room will look like with multiple choices to compare
+              side by side.
+            </p>
+            <p>
+              Not sure where to start? Two-thirds of homeowners land on oak for
+              good reason — it&rsquo;s timeless and hard to get wrong.
             </p>
           </div>
           <div className="flex flex-col justify-center rounded-3xl bg-walnut-900 p-10 text-center shadow-lift">

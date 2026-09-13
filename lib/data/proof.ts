@@ -95,3 +95,32 @@ export const trustBadges: TrustBadge[] = [
   { label: "25+ years in business" },
   { label: "Free in-home consultation" },
 ];
+
+export interface Faq {
+  q: string;
+  a: string;
+}
+
+/**
+ * Objection-handling FAQ. Research: an FAQ section that answers the top
+ * hesitations ("will I regret this?") right before the final CTA lifts
+ * conversion by removing doubt at the decision point.
+ */
+export const faqs: Faq[] = [
+  {
+    q: "Can you match a lower quote I've received?",
+    a: "Yes — bring us a comparable written quote and we'll beat it. Sourcing our hardwoods directly is what makes that possible.",
+  },
+  {
+    q: "Will installation make a mess of my home?",
+    a: "We protect adjacent rooms, contain dust, and clean up daily. Most rooms are finished in a few days, and we leave the space better than we found it.",
+  },
+  {
+    q: "Can you refinish or repair my existing wood floors?",
+    a: "Often, yes. Solid and many engineered floors can be sanded and refinished. We'll tell you honestly whether refinishing or replacement is the smarter spend.",
+  },
+  {
+    q: "What areas do you serve?",
+    a: "We install throughout greater Atlanta and the surrounding communities. Not sure if you're in range? Just ask — we'll let you know right away.",
+  },
+];

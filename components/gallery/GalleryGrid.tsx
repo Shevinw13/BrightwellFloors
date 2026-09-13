@@ -17,6 +17,7 @@ import {
   galleryImages as defaultImages,
   type GalleryImage,
 } from "@/lib/data/gallery";
+import { galleryPhotos } from "@/lib/data/images";
 
 export interface GalleryGridProps {
   images?: GalleryImage[];
@@ -28,29 +29,23 @@ export default function GalleryGrid({
   return (
     <ul
       role="list"
-      className="grid auto-rows-[200px] grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3"
+      className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3"
     >
-      {images.map((image) => (
-        <li
-          key={image.id}
-          className={
-            image.tall
-              ? "sm:row-span-2 sm:auto-rows-auto"
-              : ""
-          }
-        >
+      {images.map((image) => {
+        const photo = galleryPhotos[image.id];
+        return (
+        <li key={image.id}>
           <figure
-            className="group relative flex h-full w-full flex-col justify-end overflow-hidden rounded-2xl shadow-soft ring-1 ring-cream-200 transition-all duration-300 hover:shadow-lift"
-            aria-label={image.alt}
+            className="group relative flex aspect-[4/3] w-full flex-col justify-end overflow-hidden rounded-2xl shadow-soft ring-1 ring-cream-200 transition-all duration-300 hover:shadow-lift"
+            aria-label={photo?.alt ?? image.alt}
           >
-            {image.src ? (
+            {photo ? (
               <Image
-                src={image.src}
-                alt={image.alt}
-                width={image.width ?? 1600}
-                height={image.height ?? 1067}
+                src={photo.src}
+                alt={photo.alt}
+                fill
                 sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-                className="absolute inset-0 h-full w-full object-cover"
+                className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
               />
             ) : (
               <>
@@ -69,13 +64,14 @@ export default function GalleryGrid({
                       "repeating-linear-gradient(90deg, rgba(255,255,255,0.12) 0px, rgba(0,0,0,0.16) 8px, rgba(255,255,255,0.08) 16px)",
                   }}
                 />
-                {/* Bottom scrim for caption legibility */}
-                <span
-                  aria-hidden="true"
-                  className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-charcoal-900/80 to-transparent"
-                />
               </>
             )}
+
+            {/* Bottom scrim for caption legibility (over photo or tile) */}
+            <span
+              aria-hidden="true"
+              className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-charcoal-900/85 to-transparent"
+            />
 
             <figcaption className="relative z-10 p-5">
               <span className="inline-block rounded-full bg-cream-50/90 px-3 py-1 text-body-sm font-medium text-walnut-900">
@@ -87,7 +83,8 @@ export default function GalleryGrid({
             </figcaption>
           </figure>
         </li>
-      ))}
+        );
+      })}
     </ul>
   );
 }

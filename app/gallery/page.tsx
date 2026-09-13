@@ -1,6 +1,8 @@
 import { Section } from "@/components/ui/Section";
 import { CTABand } from "@/components/ui/CTABand";
+import { PageHeader } from "@/components/ui/PageHeader";
 import GalleryGrid from "@/components/gallery/GalleryGrid";
+import { galleryPhotos } from "@/lib/data/images";
 import { pageMetadata } from "@/lib/seo/metadata";
 
 export const metadata = pageMetadata.gallery;
@@ -12,22 +14,12 @@ export const metadata = pageMetadata.gallery;
 export default function GalleryPage() {
   return (
     <>
-      <section className="wood-grain w-full">
-        <div className="mx-auto max-w-6xl px-4 py-section-lg sm:px-6 lg:px-8">
-          <p className="flex items-center gap-3 font-sans text-eyebrow font-semibold uppercase text-oak-300">
-            <span aria-hidden="true" className="h-px w-10 bg-oak-300/70" />
-            Our work
-          </p>
-          <h1 className="mt-6 max-w-3xl font-display text-display-lg text-cream-50">
-            Floors we&rsquo;re proud to stand on
-          </h1>
-          <p className="mt-6 max-w-2xl text-body-lg text-cream-100">
-            A selection of real wood flooring projects installed by our
-            craftsmen. Every space shows the species, style, and finish behind
-            our guaranteed results.
-          </p>
-        </div>
-      </section>
+      <PageHeader
+        eyebrow="Our work"
+        title="Floors we're proud to stand on"
+        intro="A selection of real wood flooring projects installed by our craftsmen. Every space shows the species, style, and finish behind our guaranteed results."
+        image={galleryPhotos["white-oak-living-room"]}
+      />
 
       <Section
         eyebrow="Recent projects"

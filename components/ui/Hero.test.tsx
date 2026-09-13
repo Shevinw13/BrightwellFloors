@@ -19,7 +19,7 @@ describe("Hero", () => {
   it("preserves the guarantee messaging (Req 3.2)", () => {
     render(<Hero />);
     expect(
-      screen.getByText(/best result, 100% guaranteed/i)
+      screen.getByText(/best result 100% guaranteed/i)
     ).toBeInTheDocument();
   });
 

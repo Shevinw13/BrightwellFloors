@@ -1,6 +1,8 @@
 import { QuoteForm } from "@/components/contact/QuoteForm";
+import { PageHeader } from "@/components/ui/PageHeader";
 import { business } from "@/lib/data/business";
 import { trustStats } from "@/lib/data/proof";
+import { consultationImage } from "@/lib/data/images";
 import { pageMetadata } from "@/lib/seo/metadata";
 
 export const metadata = pageMetadata.contact;
@@ -13,22 +15,12 @@ export const metadata = pageMetadata.contact;
 export default function ContactPage() {
   return (
     <>
-      {/* Intro */}
-      <section className="wood-grain w-full">
-        <div className="mx-auto max-w-6xl px-4 py-section-lg sm:px-6 lg:px-8">
-          <p className="flex items-center gap-3 font-sans text-eyebrow font-semibold uppercase text-oak-300">
-            <span aria-hidden="true" className="h-px w-10 bg-oak-300/70" />
-            Free quote &amp; consultation
-          </p>
-          <h1 className="mt-6 max-w-3xl font-display text-display-lg text-cream-50">
-            Let&rsquo;s find your perfect floor
-          </h1>
-          <p className="mt-6 max-w-2xl text-body-lg text-cream-100">
-            Tell us about your project and we&rsquo;ll get back to you fast with
-            honest advice and an unbeatable quote. No charge, no obligation.
-          </p>
-        </div>
-      </section>
+      <PageHeader
+        eyebrow="Free quote & consultation"
+        title="Let's find your perfect floor"
+        intro="Tell us about your project and we'll get back to you fast with honest advice and an unbeatable quote. No charge, no obligation."
+        image={consultationImage}
+      />
 
       <section className="w-full py-section-sm md:py-section lg:py-section-lg">
         <div className="mx-auto grid w-full max-w-6xl grid-cols-1 gap-12 px-4 sm:px-6 lg:grid-cols-5 lg:gap-16 lg:px-8">
